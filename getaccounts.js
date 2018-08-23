@@ -35,7 +35,6 @@ let loadAccounts = async () => {
     for (line of lines) {
       let split = line.split(',')
       if (split[0]) {
-        console.log(split)
         accounts[split[0]] = split[1]
       }
     }

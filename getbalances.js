@@ -27,9 +27,11 @@ let run = async () => {
 
   for (account of Object.keys(accounts)) {
     try {
-      let balance = await web3.eth.getBalance(account)
+      const balance = await web3.eth.getBalance(account)
       if (balance > 0) {
-        balances[account] = [balance,accounts[account]]
+        const timestamp = timeConverter(accounts[account])
+        balances[account] = [balance,timestamp]
+
       }
     } catch (err) {
       console.log(err)
@@ -37,6 +39,19 @@ let run = async () => {
   }
 
   write()
+}
+
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = year + '-' + a.getMonth() + '-' + date + ' ' + hour + ':' + min + ':' + sec;
+  return time;
 }
 
 run()
