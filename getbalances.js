@@ -30,7 +30,7 @@ let run = async () => {
       const balance = await web3.eth.getBalance(account)
       if (balance > 0) {
         const timestamp = timeConverter(accounts[account])
-        balances[account] = [balance,timestamp]
+        balances[account] = [web3.utils.fromWei(balance),timestamp]
 
       }
     } catch (err) {
@@ -50,7 +50,7 @@ function timeConverter(UNIX_timestamp){
   var hour = a.getHours();
   var min = a.getMinutes();
   var sec = a.getSeconds();
-  var time = year + '-' + a.getMonth() + '-' + date + ' ' + hour + ':' + min + ':' + sec;
+  var time = year + '-' + (a.getMonth() + 1) + '-' + date + ' ' + hour + ':' + min + ':' + sec;
   return time;
 }
 
