@@ -19,15 +19,26 @@ let accounts = {}
 
 let write = async () => {
   fs.writeFileSync(blockNumFile,blockNum)
-  fs.writeFileSync(accountsFile,Object.keys(accounts).join("\n"))
+
+  let output = ''
+  for(const key of Object.keys(accounts)) {
+    output += key + ',' + accounts[key] + "\n"
+  }
+  fs.writeFileSync(accountsFile,output)
+
   console.log("wrote data")
 }
 
 let loadAccounts = async () => {
   if (fs.existsSync(accountsFile)) {
-    contents = fs.readFileSync(accountsFile,'UTF-8').toString().split("\n")
-    for (i in contents)
-      accounts[contents[i]] = true
+    let lines = fs.readFileSync(accountsFile,'UTF-8').toString().split("\n")
+    for (line of lines) {
+      let split = line.split(',')
+      if (split[0]) {
+        console.log(split)
+        accounts[split[0]] = split[1]
+      }
+    }
   }
 }
 
@@ -43,7 +54,7 @@ let run = async () => {
     if (!block)
       break
 
-    accounts[block.miner] = true
+    accounts[block.miner] = block.timestamp
 
     if ((blockNum % 100 - 1) == 0)
       console.log('block', blck,)
