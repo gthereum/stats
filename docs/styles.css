@@ -1,0 +1,13 @@
+body {
+	font-family: sans-serif;
+}
+
+table, th, td {
+	border: 1px solid #DDD;
+	border-spacing: 0;
+}
+
+th, td {
+	padding: 5px;
+	text-align: right;
+}
