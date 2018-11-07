@@ -11,7 +11,7 @@ let balances = {}
 
 let write = async () => {
   fs.writeFileSync(balancesFile,JSON.stringify(balances))
-  console.log("wrote data")
+  console.log(balancesFile)
 }
 
 let run = async () => {

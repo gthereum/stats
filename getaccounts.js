@@ -26,7 +26,7 @@ let write = async () => {
   }
   fs.writeFileSync(accountsFile,output)
 
-  console.log("wrote data")
+  console.log(accountsFile)
 }
 
 let loadAccounts = async () => {
