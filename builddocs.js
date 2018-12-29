@@ -2,7 +2,7 @@ const fs = require('fs')
 const dateFormat = require('dateformat')
 
 let balancesFile = 'data/balances.txt'
-let aliasesFile = '.aliases'
+let aliasesFile = 'private.aliases.csv'
 
 let contents = JSON.parse(fs.readFileSync(balancesFile,'utf8'));
 
@@ -34,10 +34,13 @@ for (account of accounts) {
 	let balance = parseFloat(contents[account][0]).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })
 	let lastMined = contents[account][1]
 
-	let account_str = aliases[account] ? aliases[account] : account;
 
-	output += "<tr><td>" + account + "</td><td>" + balance + "</td><td>" + lastMined + "</td></tr>\n"
-	privateOutput += "<tr><td>" + account_str + "</td><td>" + balance + "</td><td>" + lastMined + "</td></tr>\n"
+	const account_public = aliases[account] ? aliases[account][0] : account
+	console.log(aliases)
+	output += "<tr><td>" + account_public + "</td><td>" + balance + "</td><td>" + lastMined + "</td></tr>\n"
+	
+	const account_private = aliases[account] ? aliases[account][1] : account
+	privateOutput += "<tr><td>" + account_private + "</td><td>" + balance + "</td><td>" + lastMined + "</td></tr>\n"
 
 }
 
@@ -59,8 +62,7 @@ function getAliases() {
 
 		for (let line of lines) {
 			let components = line.split(',')			
-			aliases[components[0]] = components[1];
-
+			aliases[components[0]] = [components[1],components[2]];
 		}
 
 		// let lineReader = require('readline').createInterface({

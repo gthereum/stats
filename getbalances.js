@@ -1,5 +1,6 @@
 const Web3 = require('web3')
 const fs = require('fs')
+const dateFormat = require('dateformat')
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
@@ -41,7 +42,12 @@ let run = async () => {
   write()
 }
 
-function timeConverter(UNIX_timestamp){
+function timeConverter(UNIX_timestamp) {
+  var a = new Date(UNIX_timestamp * 1000);
+  return dateFormat(a,"yyyy-mm-dd hh:MM:ss")
+}
+
+function timeConverter_old(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();

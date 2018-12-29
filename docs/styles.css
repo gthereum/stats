@@ -1,13 +1,26 @@
+/* 2016 palette:	https://www.w3schools.com/colors/colors_palettes.asp */
+
 body {
 	font-family: sans-serif;
 }
 
 table, th, td {
-	border: 1px solid #DDD;
+	border: 1px solid #deeaee;
 	border-spacing: 0;
 }
 
 th, td {
 	padding: 5px;
 	text-align: right;
+	font-family: monospace;
+}
+
+td:first-child {
+	font-family: sans-serif;
+}
+
+th {
+
+	background-color: #034f84;
+	color: white;
 }
