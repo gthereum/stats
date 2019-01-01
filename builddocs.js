@@ -36,7 +36,6 @@ for (account of accounts) {
 
 
 	const account_public = aliases[account] ? aliases[account][0] : account
-	console.log(aliases)
 	output += "<tr><td>" + account_public + "</td><td>" + balance + "</td><td>" + lastMined + "</td></tr>\n"
 	
 	const account_private = aliases[account] ? aliases[account][1] : account
